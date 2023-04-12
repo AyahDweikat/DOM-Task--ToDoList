@@ -1,4 +1,9 @@
 *{
     padding: 5px 10px;
-    margin: 8px;
+    margin: 4px;
 }
+.list-item{
+    display: flex;
+}
+
+

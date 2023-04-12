@@ -17,13 +17,19 @@
             </div>
             <div class="form-control">
                 <label for="assignee">Assignee</label>
-                <input type="text" id="assignee" class="assignee" placeholder="Assignee" />
+                <input type="text" id="assignee" class="assignee" placeholder="Assignee" value="" />
             </div>
-            <button>Add</button>
+            <button  id="submitTask">Add</button>
         </form>
+        <div>
+            <span>DoneTasks: <span id="counterDone">0</span></span>
+            <span>UndoneTasks: <span id="counterUnDone">0</span></span>
+
+        </div>
+        <hr/>
         <input type="text" id="search" class="search" placeholder="Search" />
         <div >
-            <ul id="demo">
+            <ul id="taskDisplay">
                 
             </ul>
         </div>
