@@ -27,10 +27,7 @@ let search = document.getElementById("search");
 let taskDisplay = document.getElementById("taskDisplay");
 let counterDone = document.getElementById("counterDone");
 let counterUnDone = document.getElementById("counterUnDone");
-// (function startLoading(){
-//     taskList = getFromLocalStorage();
-    
-// })();
+
 let taskList = getFromLocalStorage();
 
 
@@ -67,9 +64,21 @@ search.addEventListener("keyup", function searchHandler(event) {
 
 });
 function changeDoneHandler(event, _taskList, id) {
+    let _state = "";
+    taskList.forEach((item) => {
+        if (item.id === id) {
+            _state = !item.doneState;
+        }
+      });
+
   taskList.forEach((item) => {
     if (item.id === id) {
-      item.doneState = !item.doneState;
+      item.doneState = _state;
+    }
+  });
+  _taskList.forEach((item) => {
+    if (item.id === id) {
+      item.doneState = _state;
     }
   });
   console.log("main",taskList)
@@ -80,15 +89,20 @@ function changeDoneHandler(event, _taskList, id) {
   displayTask(_taskList);
   displayCounter(_taskList);
 }
-function deleteHandler(taskList, id) {
+function deleteHandler(_taskList, id) {
+  _taskList.forEach((item, idx) => {
+    if (item.id === id) {
+      _taskList.splice(idx, 1);
+    }
+  });
   taskList.forEach((item, idx) => {
     if (item.id === id) {
       taskList.splice(idx, 1);
     }
   });
-  storeInLocal(taskList)
-  displayTask(taskList);
-  displayCounter(taskList);
+  storeInLocal(taskList);
+  displayTask(_taskList);
+  displayCounter(_taskList);
 }
 function addTask(taskInput, asigneeInput) {
   let objTask = {
