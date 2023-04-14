@@ -1,16 +1,18 @@
-let taskList = [
-  //   {
-  // id:1
-  //     taskInput: "task 1",
-  //     asigneeInput: "ayah",
-  //     doneState: false,
-  //   },
-  //   {
-  //     taskInput: "task 2",
-  //     asigneeInput: "ameen",
-  //     doneState: false,
-  //   },
-];
+// let taskList = [
+//   //   {
+//   // id:1
+//   //     taskInput: "task 1",
+//   //     asigneeInput: "ayah",
+//   //     doneState: false,
+//   //   },
+//   //   {
+//   //     taskInput: "task 2",
+//   //     asigneeInput: "ameen",
+//   //     doneState: false,
+//   //   },
+// ];
+
+
 let count = 0;
 let genID = generateID();
 let text = "";
@@ -25,6 +27,12 @@ let search = document.getElementById("search");
 let taskDisplay = document.getElementById("taskDisplay");
 let counterDone = document.getElementById("counterDone");
 let counterUnDone = document.getElementById("counterUnDone");
+// (function startLoading(){
+//     taskList = getFromLocalStorage();
+    
+// })();
+let taskList = getFromLocalStorage();
+
 
 task.addEventListener("keyup", function taskHandler(event) {
   taskInput = event.target.value;
@@ -55,15 +63,22 @@ search.addEventListener("keyup", function searchHandler(event) {
     }
   });
   displayTask(searchedResult);
+  displayCounter(searchedResult);
+
 });
-function changeDoneHandler(event, taskList, id) {
+function changeDoneHandler(event, _taskList, id) {
   taskList.forEach((item) => {
     if (item.id === id) {
       item.doneState = !item.doneState;
     }
   });
-  displayTask(taskList);
-  displayCounter(taskList);
+  console.log("main",taskList)
+  console.log( "_",_taskList)
+
+
+  storeInLocal(taskList);
+  displayTask(_taskList);
+  displayCounter(_taskList);
 }
 function deleteHandler(taskList, id) {
   taskList.forEach((item, idx) => {
@@ -71,6 +86,7 @@ function deleteHandler(taskList, id) {
       taskList.splice(idx, 1);
     }
   });
+  storeInLocal(taskList)
   displayTask(taskList);
   displayCounter(taskList);
 }
@@ -82,12 +98,22 @@ function addTask(taskInput, asigneeInput) {
     doneState: false,
   };
   taskList.push(objTask);
+  storeInLocal(taskList);
 }
 function clearInput() {
   task.value = "";
   asignee.value = "";
   taskInput = "";
   asigneeInput = "";
+}
+function storeInLocal(list){
+    localStorage.setItem('taskList', JSON.stringify(list));
+}
+function getFromLocalStorage(){
+    let _list = JSON.parse(localStorage.getItem('taskList'))
+    displayTask(_list)
+    displayCounter(_list)
+    return _list;
 }
 function displayTask(list) {
   taskDisplay.innerHTML = "";
@@ -100,6 +126,9 @@ function displayTask(list) {
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
     deleteBtn.setAttribute("id", "deleteTask");
+    // deleteBtn.setAttribute("data-bs-toggle", "modal");
+    // deleteBtn.setAttribute("data-bs-target", "#exampleModal");
+
     deleteBtn.addEventListener("click", () => deleteHandler(list, item.id));
 
     const btnDoneState = document.createElement("button");
@@ -119,18 +148,7 @@ function displayTask(list) {
     const newList = document.createElement("li");
     newList.appendChild(newDiv);
     taskDisplay.appendChild(newList);
-
-    // text += `
-    // <div id="changeDoneState" onClick="changeDoneHandler(event,${item.id})">
-    // ${
-    //     item.doneState
-    //     ? `<i class="fa-solid fa-circle-check"></i>`
-    //     : `<i class="fa-regular fa-circle-check"></i>`
-    // }
-    // </div>
-    // `;
   });
-  //   taskDisplay.innerHTML = text;
 }
 function displayCounter(taskList) {
   let countUnDone = 0;
