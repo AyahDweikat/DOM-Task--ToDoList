@@ -7,3 +7,15 @@
 }
 
 
+.modal {
+    background-color: #fff;
+    text-align: center;
+    width: 30%;
+    height: 30%;
+    margin-inline: auto;
+    position: fixed;
+    top: 25vh;
+    left: 35%;
+    box-shadow: 1px 1px 500px 400px rgba(0, 0, 0, 0.15);
+}
+

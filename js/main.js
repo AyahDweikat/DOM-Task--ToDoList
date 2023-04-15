@@ -143,7 +143,9 @@ function displayTask(list) {
     // deleteBtn.setAttribute("data-bs-toggle", "modal");
     // deleteBtn.setAttribute("data-bs-target", "#exampleModal");
 
-    deleteBtn.addEventListener("click", () => deleteHandler(list, item.id));
+    // deleteBtn.addEventListener("click", () => deleteHandler(list, item.id));
+    deleteBtn.addEventListener("click", () => displayAlert(list, item.id));
+
 
     const btnDoneState = document.createElement("button");
     btnDoneState.innerHTML = item.doneState ? (
@@ -152,6 +154,7 @@ function displayTask(list) {
       `<i class="fa-regular fa-circle-check"></i>`
     );
     btnDoneState.addEventListener('click',(event)=> changeDoneHandler(event, list, item.id))
+
 
     const newDiv = document.createElement("div");
     newDiv.appendChild(taskParag);
@@ -163,6 +166,34 @@ function displayTask(list) {
     newList.appendChild(newDiv);
     taskDisplay.appendChild(newList);
   });
+}
+
+
+let exampleModal = document.getElementById('exampleModal');
+let delBtn = document.getElementById('delBtn');
+let closeBtn = document.getElementById('closeBtn');
+
+function displayAlert( list, id){
+  exampleModal.hidden = false;
+  window.addEventListener('click', (event)=>{
+    if( event.target.id !=="exampleModal" && exampleModal.hasAttribute("hidden")){
+      exampleModal.hidden = true;
+    }
+  })
+  delBtn.addEventListener('click', ()=> {
+    deleteHandler(list, id)
+    exampleModal.hidden = true;
+  })
+  closeBtn.addEventListener('click', ()=> {
+    exampleModal.hidden = true;
+  })
+  
+//   window.onclick = function(event) {
+//     if (event.target.id != "exampleModal" && exampleModal.hidden == false) {
+//       //  $("#modal_div").hide();
+//        exampleModal.hidden = true;
+//     }
+//  }
 }
 function displayCounter(taskList) {
   let countUnDone = 0;

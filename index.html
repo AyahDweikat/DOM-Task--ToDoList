@@ -1,58 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
-    <link rel="stylesheet" href="./css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
     <section class="form-control">
-        <form action="">
-            <div class="form-control">
-                <label for="task">Task</label>
-                <input type="text" id="task" class="task" placeholder="Task" />
-            </div>
-            <div class="form-control">
-                <label for="assignee">Assignee</label>
-                <input type="text" id="assignee" class="assignee" placeholder="Assignee" value="" />
-            </div>
-            <button  id="submitTask">Add</button>
-        </form>
-        <div>
-            <span>DoneTasks: <span id="counterDone">0</span></span>
-            <span>UndoneTasks: <span id="counterUnDone">0</span></span>
-
+      <form action="">
+        <div class="form-control">
+          <label for="task">Task</label>
+          <input type="text" id="task" class="task" placeholder="Task" />
         </div>
-        <hr/>
-        <input type="text" id="search" class="search" placeholder="Search" />
-        <div >
-            <ul id="taskDisplay">
-                
-            </ul>
+        <div class="form-control">
+          <label for="assignee">Assignee</label>
+          <input
+            type="text"
+            id="assignee"
+            class="assignee"
+            placeholder="Assignee"
+            value=""
+          />
         </div>
-    </section>
-    <!-- <section> -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+        <button id="submitTask">Add</button>
+      </form>
+      <div>
+        <span>DoneTasks: <span id="counterDone">0</span></span>
+        <span>UndoneTasks: <span id="counterUnDone">0</span></span>
+      </div>
+      <hr />
+      <input type="text" id="search" class="search" placeholder="Search" />
+      <div>
+        <ul id="taskDisplay"></ul>
+        <div
+          class="modal"
+          id="exampleModal"
+          hidden
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h3>Are you sure ? </h3>
+                <p>This action will delete your todo item from list</p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id="closeBtn"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" id="delBtn" class="btn btn-primary">
+                  Delete
+                </button>
               </div>
             </div>
-          </div> -->
-    <!-- </section> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      
+    </section>
     <script src="./js/main.js"></script>
-</body>
+  </body>
 </html>
