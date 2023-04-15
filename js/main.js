@@ -13,8 +13,6 @@
 // ];
 
 
-let count = 0;
-let genID = generateID();
 let text = "";
 let searchedResult = [];
 let taskInput = "";
@@ -27,8 +25,13 @@ let search = document.getElementById("search");
 let taskDisplay = document.getElementById("taskDisplay");
 let counterDone = document.getElementById("counterDone");
 let counterUnDone = document.getElementById("counterUnDone");
+let exampleModal = document.getElementById('exampleModal');
+let delBtn = document.getElementById('delBtn');
+let closeBtn = document.getElementById('closeBtn');
 
 let taskList = getFromLocalStorage();
+let count = taskList[taskList.length-1]?.id +1 || 0 ;
+let genID = generateID();
 
 
 task.addEventListener("keyup", function taskHandler(event) {
@@ -81,10 +84,6 @@ function changeDoneHandler(event, _taskList, id) {
       item.doneState = _state;
     }
   });
-  console.log("main",taskList)
-  console.log( "_",_taskList)
-
-
   storeInLocal(taskList);
   displayTask(_taskList);
   displayCounter(_taskList);
@@ -140,10 +139,6 @@ function displayTask(list) {
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
     deleteBtn.setAttribute("id", "deleteTask");
-    // deleteBtn.setAttribute("data-bs-toggle", "modal");
-    // deleteBtn.setAttribute("data-bs-target", "#exampleModal");
-
-    // deleteBtn.addEventListener("click", () => deleteHandler(list, item.id));
     deleteBtn.addEventListener("click", () => displayAlert(list, item.id));
 
 
@@ -169,31 +164,24 @@ function displayTask(list) {
 }
 
 
-let exampleModal = document.getElementById('exampleModal');
-let delBtn = document.getElementById('delBtn');
-let closeBtn = document.getElementById('closeBtn');
 
-function displayAlert( list, id){
+
+function displayAlert(list, id){
   exampleModal.hidden = false;
-  window.addEventListener('click', (event)=>{
-    if( event.target.id !=="exampleModal" && exampleModal.hasAttribute("hidden")){
-      exampleModal.hidden = true;
-    }
-  })
   delBtn.addEventListener('click', ()=> {
-    deleteHandler(list, id)
+    deleteHandler(list, id);
     exampleModal.hidden = true;
   })
   closeBtn.addEventListener('click', ()=> {
     exampleModal.hidden = true;
+    id=-1;
   })
-  
-//   window.onclick = function(event) {
-//     if (event.target.id != "exampleModal" && exampleModal.hidden == false) {
-//       //  $("#modal_div").hide();
-//        exampleModal.hidden = true;
-//     }
-//  }
+  window.addEventListener('click', (event)=>{
+    if ( event.target.tagName !=="I" && event.target.tagName !=="BUTTON" && !exampleModal.hidden) {
+       exampleModal.hidden = true;
+       id=-1;
+    }
+ })
 }
 function displayCounter(taskList) {
   let countUnDone = 0;
