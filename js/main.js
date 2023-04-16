@@ -17,7 +17,7 @@ let text = "";
 let searchedResult = [];
 let taskInput = "";
 let asigneeInput = "";
-
+let taskNum = document.getElementById('taskNum')
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
 let submitTask = document.getElementById("submitTask");
@@ -32,7 +32,9 @@ let closeBtn = document.getElementById('closeBtn');
 let taskList = getFromLocalStorage();
 let count = taskList[taskList.length-1]?.id +1 || 0 ;
 let genID = generateID();
-
+function getNumTasks(taskList){
+  taskNum.innerHTML= `${taskList.length} Tasks `;
+}
 
 task.addEventListener("keyup", function taskHandler(event) {
   taskInput = event.target.value;
@@ -131,35 +133,58 @@ function getFromLocalStorage(){
 function displayTask(list) {
   taskDisplay.innerHTML = "";
   list.forEach((item) => {
-    const taskParag = document.createElement("p");
+    let taskParag = document.createElement("p");
     taskParag.innerHTML = item.taskInput;
-    const assigneeParag = document.createElement("p");
-    assigneeParag.innerHTML = item.asigneeInput;
+    let assigneeSpan = document.createElement("span");
+    assigneeSpan.innerHTML = item.asigneeInput;
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+    deleteBtn.innerHTML = `<i class="fa-solid fa-trash" style="color: #FF0000;"></i>`;
     deleteBtn.setAttribute("id", "deleteTask");
     deleteBtn.addEventListener("click", () => displayAlert(list, item.id));
-
+    deleteBtn.classList.add("deleteBtn")
 
     const btnDoneState = document.createElement("button");
+    btnDoneState.classList.add("btnDoneState")
     btnDoneState.innerHTML = item.doneState ? (
-      `<i class="fa-solid fa-circle-check"></i>`
+      `<i class="fa-solid fa-circle-check" style="color: #14bba6;"></i>`
     ) : (
-      `<i class="fa-regular fa-circle-check"></i>`
+      `<i class="fa-regular fa-circle"></i>`
     );
     btnDoneState.addEventListener('click',(event)=> changeDoneHandler(event, list, item.id))
+    btnDoneState.classList.add(item.doneState ? "doneBtn" :"undoneBtn")
 
 
-    const newDiv = document.createElement("div");
-    newDiv.appendChild(taskParag);
-    newDiv.appendChild(assigneeParag);
-    newDiv.appendChild(deleteBtn);
-    newDiv.appendChild(btnDoneState);
+    const btnEdit = document.createElement("button");
+    btnEdit.classList.add("btnEdit");
+    btnEdit.innerHTML= `<i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+    btnEdit.addEventListener("click", ()=>{
+      // alert("hello")
+      taskParag.contenteditable="true";
+    })
+    
+    
+    btnEdit.disabled = item.doneState;
+    
 
+    const divOne = document.createElement("div");
+    const divTwo = document.createElement("div");
+    const divThree = document.createElement("div");
+
+    divOne.appendChild(btnDoneState);
+    divTwo.appendChild(taskParag);
+    divTwo.appendChild(assigneeSpan);
+    divThree.appendChild(btnEdit);
+    divThree.appendChild(deleteBtn);
+    divThree.classList.add('del-edit-btn')
     const newList = document.createElement("li");
-    newList.appendChild(newDiv);
+    newList.classList.add(item.doneState ? "done-task" :"undone-task")
+    newList.appendChild(divOne);
+    newList.appendChild(divTwo);
+    newList.appendChild(divThree);
+
     taskDisplay.appendChild(newList);
+    getNumTasks(list)
   });
 }
 
