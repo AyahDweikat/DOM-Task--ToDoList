@@ -9,24 +9,37 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <section class="form-control">
-      <form action="">
-        <div class="form-control">
-          <label for="task">Task</label>
-          <input type="text" id="task" class="task" placeholder="Task" />
-        </div>
-        <div class="form-control">
-          <label for="assignee">Assignee</label>
-          <input
-            type="text"
-            id="assignee"
-            class="assignee"
-            placeholder="Assignee"
-            value=""
-          />
-        </div>
-        <button id="submitTask">Add</button>
-      </form>
+    <header>
+      <div role="img" aria-label="Logo" class="logo">
+        <img
+          src="./assets/images/logo-light-theme.webp"
+          role="logo"
+          alt="todoistic logo"
+        />
+      </div>
+      <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search Tasks"
+      />
+    </header>
+    <section class="hero-section">
+      <div class="heading">
+        <h2>You Got <span class="taskNum" id="taskNum">0 Tasks </span>today</h2>
+        <button>
+          <span class="plus-sign"><i class="fa-solid fa-plus"></i></span> New
+          Task
+        </button>
+      </div>
+      <div class="filters">
+        <span class="">Done (<span id="counterDone">0</span>)</span>
+        <span class="">Pending (<span id="counterUnDone">0</span>)</span>
+        <span class="dash-span">|</span>
+        <span class="">Urgent (<span id="urgent">0</span>)</span>
+        <span class="">High (<span id="high">0</span>)</span>
+        <span class="">Low (<span id="low">0</span>)</span>
+      </div>
       <div>
         <span>DoneTasks: <span id="counterDone">0</span></span>
         <span>UndoneTasks: <span id="counterUnDone">0</span></span>
