@@ -17,7 +17,7 @@
     --bg-input-color:#E6E6E6;
     --shadow-bg-color:#4D4D4D4D;
 }
-/* .dark{
+/* :root{
     --main-font-family:Inter;
     --main-color: #14B8A6;
     --theme-color:#FFFFFF;
@@ -249,6 +249,7 @@ span.dash-span {
     height: 18px;
     width: 14px;
     font-size: 17px;
+    background-color: inherit;
 }
 .btnEdit {
     background-color: transparent;
