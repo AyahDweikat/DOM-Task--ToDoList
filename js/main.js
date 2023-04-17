@@ -1,4 +1,3 @@
-
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
 let submitTask = document.getElementById("submitTask");
@@ -7,6 +6,7 @@ let taskList =[];
 taskList = getFromLocalStorage();
 storeInLocal(taskList)
 // taskList = getFromLocalStorage() ;
+
 
 submitTask.addEventListener("click", function addTaskHandler(event) {
   //done
