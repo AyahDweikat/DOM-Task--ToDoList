@@ -1,26 +1,4 @@
-<<<<<<< Updated upstream
-// let taskList = [
-//   //   {
-//   // id:1
-//   //     taskInput: "task 1",
-//   //     asigneeInput: "ayah",
-//   //     doneState: false,
-//   //   },
-//   //   {
-//   //     taskInput: "task 2",
-//   //     asigneeInput: "ameen",
-//   //     doneState: false,
-//   //   },
-// ];
 
-
-let text = "";
-let searchedResult = [];
-let taskInput = "";
-let asigneeInput = "";
-
-=======
->>>>>>> Stashed changes
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
 let submitTask = document.getElementById("submitTask");
@@ -29,14 +7,6 @@ let taskList =[];
 taskList = getFromLocalStorage();
 storeInLocal(taskList)
 // taskList = getFromLocalStorage() ;
-
-<<<<<<< Updated upstream
-let taskList = getFromLocalStorage();
-let count = taskList[taskList.length-1]?.id +1 || 0 ;
-let genID = generateID();
-
-=======
->>>>>>> Stashed changes
 
 submitTask.addEventListener("click", function addTaskHandler(event) {
   //done
