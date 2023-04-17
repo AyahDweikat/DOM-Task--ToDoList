@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do List</title>
+    <title>Todoistic</title>
     <link rel="stylesheet" href="./css/all.min.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
@@ -40,13 +40,11 @@
         <span class="">High (<span id="high">0</span>)</span>
         <span class="">Low (<span id="low">0</span>)</span>
       </div>
-      <div>
-        <span>DoneTasks: <span id="counterDone">0</span></span>
-        <span>UndoneTasks: <span id="counterUnDone">0</span></span>
-      </div>
-      <div>
-        <ul id="taskDisplay" class="task-list"></ul>
-        <div class="modal" id="exampleModal" hidden>
+    </section>
+    <section class="tasks">
+      <ul id="taskDisplay" class="task-list"></ul>
+      <div class="shadow" id="shadowModal" hidden>
+        <div class="modal"id="deleteModal">
           <h3>Delete Task</h3>
           <p>Are you sure you want to delete this task?</p>
           <span
