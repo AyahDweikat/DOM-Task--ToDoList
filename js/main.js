@@ -3,10 +3,9 @@ let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
 let submitTask = document.getElementById("submitTask");
 let search = document.getElementById("search");
-let taskList =[];
+let taskList = [];
 taskList = getFromLocalStorage();
-storeInLocal(taskList)
-// taskList = getFromLocalStorage() ;
+storeInLocal(taskList);
 
 submitTask.addEventListener("click", function addTaskHandler(event) {
   //done
@@ -18,24 +17,28 @@ submitTask.addEventListener("click", function addTaskHandler(event) {
   displayTask(taskList);
   displayCounter(taskList);
 });
-search.addEventListener("keyup", function searchHandler(event) {
+search.addEventListener("keyup", (event) => {
+  //done
+  let value = event.target.value;
+  searchHandler(value, taskList);
+});
+function searchHandler(value, taskList) {
+  //done
   let searchedResult = [];
-  if (event.target.value == "") {
+  if (value == "") {
     displayTask(taskList);
     displayCounter(taskList);
     return;
   }
-  taskList.forEach((item) => {
-    if (
-      item.taskInput.toLowerCase().includes(event.target.value.toLowerCase()) ||
-      item.asigneeInput.toLowerCase().includes(event.target.value.toLowerCase())
-    ) {
-      searchedResult.push(item);
-    }
+  searchedResult = taskList.filter((item) => {
+    return (
+      item.taskInput.toLowerCase().includes(value.toLowerCase()) ||
+      item.asigneeInput.toLowerCase().includes(value.toLowerCase())
+    );
   });
   displayTask(searchedResult);
   displayCounter(searchedResult);
-});
+}
 function getNumTasks(taskList) {
   //done
   let taskNum = document.getElementById("taskNum");
@@ -43,43 +46,45 @@ function getNumTasks(taskList) {
   taskNum.removeChild(node);
   taskNum.appendChild(document.createTextNode(`${taskList.length} Tasks `));
 }
-function changeDoneHandler(event, _taskList, id) {
-  // @this // loops to switch state
+function changeDoneHandler(event, list, id) { 
+  //done
   let _state = "";
-  taskList.forEach((item) => {
+  let { doneState } = list.find((item) => {
+    return item.id === id;
+  });
+  _state = !doneState;
+  let _taskList = list.map((item) => {
     if (item.id === id) {
-      _state = !item.doneState;
+      return {
+        id: item.id,
+        taskInput: item.taskInput,
+        asigneeInput: item.asigneeInput,
+        doneState: _state,
+      }
+    } else {
+      return item;
     }
   });
-
-  taskList.forEach((item) => {
-    if (item.id === id) {
-      item.doneState = _state;
-    }
-  });
-  _taskList.forEach((item) => {
-    if (item.id === id) {
-      item.doneState = _state;
-    }
-  });
+  taskList = _taskList;
   storeInLocal(taskList);
-  displayTask(_taskList);
-  displayCounter(_taskList);
+  searchHandler(search.value, taskList);
+  // _taskList.forEach((item) => {
+  //   if (item.id === id) {
+  //     item.doneState = _state;
+  //   }
+  // });
+  // storeInLocal(taskList);
+  // displayTask(_taskList);
+  // displayCounter(_taskList);
 }
-function deleteHandler(_taskList, id) {
-  _taskList.forEach((item, idx) => {
-    if (item.id === id) {
-      _taskList.splice(idx, 1);
-    }
+function deleteHandler(list, id) {
+  //done
+  let finalTaskList = list.filter((item) => {
+    return item.id !== id;
   });
-  taskList.forEach((item, idx) => {
-    if (item.id === id) {
-      taskList.splice(idx, 1);
-    }
-  });
+  taskList = finalTaskList;
   storeInLocal(taskList);
-  displayTask(_taskList);
-  displayCounter(_taskList);
+  searchHandler(search.value, taskList);
 }
 function addTask(taskInput, asigneeInput) {
   //done
@@ -105,14 +110,15 @@ function storeInLocal(list) {
 function getFromLocalStorage() {
   //done
   let _list = JSON.parse(localStorage.getItem("taskList"));
-  if(_list ==null){
-    _list=[]
+  if (_list == null) {
+    _list = [];
   }
   displayTask(_list);
   displayCounter(_list);
   return _list;
 }
 function displayTask(list) {
+  //done
   let taskDisplay = document.getElementById("taskDisplay");
   taskDisplay.innerHTML = "";
   list.forEach((item) => {
@@ -143,7 +149,7 @@ function displayTask(list) {
     stateIcon.style.color = "#14bba6";
     btnDoneState.appendChild(stateIcon);
     btnDoneState.addEventListener("click", (event) =>
-      changeDoneHandler(event, list, item.id)
+      changeDoneHandler(event, taskList, item.id)
     );
     btnDoneState.classList.add(item.doneState ? "doneBtn" : "undoneBtn");
 
@@ -163,20 +169,20 @@ function displayTask(list) {
           event.preventDefault();
           item.taskInput = editTaskInput.value;
           let _taskList = taskList.map((ele) => {
-            if(ele.id === item.id){
+            if (ele.id === item.id) {
               return {
                 id: item.id,
                 taskInput: editTaskInput.value,
                 asigneeInput: item.asigneeInput,
                 doneState: item.doneState,
-              }
+              };
             } else {
               return ele;
             }
           });
           textP1 = document.createTextNode(editTaskInput.value);
           taskParag.replaceChild(textP1, editTaskInput);
-          taskList= _taskList;
+          taskList = _taskList;
           storeInLocal(taskList);
         }
       });
@@ -198,33 +204,32 @@ function displayTask(list) {
     newList.appendChild(divTwo);
     newList.appendChild(divThree);
     taskDisplay.appendChild(newList);
+    getNumTasks(list);
   });
   getNumTasks(list);
 }
 function displayAlert(list, id) {
+  //done
   let delBtn = document.getElementById("delBtn");
   let closeBtn = document.getElementById("closeBtn");
-  let exampleModal = document.getElementById("exampleModal");
-  exampleModal.hidden = false;
-  delBtn.addEventListener("click", () => {
-    deleteHandler(list, id);
-    exampleModal.hidden = true;
+  let shadowModal = document.getElementById("shadowModal");
+  shadowModal.hidden = false;
+  function deleteItem() {
+    deleteHandler(taskList, id);
+    shadowModal.hidden = true;
+  }
+  delBtn.addEventListener("click", deleteItem);
+  closeBtn.addEventListener("click", (event) => {
+    delBtn.removeEventListener("click", deleteItem);
+    shadowModal.hidden = true;
   });
-  // @this id also delete function remain till i change id;
-  closeBtn.addEventListener("click", () => {
-    exampleModal.hidden = true;
-    id = -1;
-  });
-  //@this alert delete show and hide when clicking out
-  window.addEventListener("click", (event) => {
-    if (
-      event.target.tagName !== "I" &&
-      event.target.tagName !== "BUTTON" &&
-      !exampleModal.hidden
-    ) {
-      exampleModal.hidden = true;
-      id = -1;
+  shadowModal.addEventListener("click", (event) => {
+    delBtn.removeEventListener("click", deleteItem);
+    let modal = event.target.closest("#deleteModal");
+    if (modal) {
+      return;
     }
+    shadowModal.hidden = true;
   });
 }
 function displayCounter(taskList) {
