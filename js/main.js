@@ -1,29 +1,19 @@
 
+
+let search = document.getElementById("search");
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
-let submitTask = document.getElementById("submitTask");
-let search = document.getElementById("search");
+let newTask =document.getElementById("newTask");
 let taskList = [];
 taskList = getFromLocalStorage();
 storeInLocal(taskList);
 
-submitTask.addEventListener("click", function addTaskHandler(event) {
-  //done
-  event.preventDefault();
-  let taskInput = task.value;
-  let asigneeInput = asignee.value;
-  addTask(taskInput, asigneeInput);
-  clearInput();
-  displayTask(taskList);
-  displayCounter(taskList);
-});
+
 search.addEventListener("keyup", (event) => {
-  //done
   let value = event.target.value;
   searchHandler(value, taskList);
 });
 function searchHandler(value, taskList) {
-  //done
   let searchedResult = [];
   if (value == "") {
     displayTask(taskList);
@@ -40,14 +30,12 @@ function searchHandler(value, taskList) {
   displayCounter(searchedResult);
 }
 function getNumTasks(taskList) {
-  //done
   let taskNum = document.getElementById("taskNum");
   let node = taskNum.firstChild;
   taskNum.removeChild(node);
   taskNum.appendChild(document.createTextNode(`${taskList.length} Tasks `));
 }
 function changeDoneHandler(event, list, id) { 
-  //done
   let _state = "";
   let { doneState } = list.find((item) => {
     return item.id === id;
@@ -70,7 +58,6 @@ function changeDoneHandler(event, list, id) {
   searchHandler(search.value, taskList);
 }
 function deleteHandler(list, id) {
-  //done
   let finalTaskList = list.filter((item) => {
     return item.id !== id;
   });
@@ -79,7 +66,6 @@ function deleteHandler(list, id) {
   searchHandler(search.value, taskList);
 }
 function addTask(taskInput, asigneeInput) {
-  //done
   let genID = generateID();
   let objTask = {
     id: genID.next().value,
@@ -91,16 +77,13 @@ function addTask(taskInput, asigneeInput) {
   storeInLocal(taskList);
 }
 function clearInput() {
-  //done
   task.value = "";
   asignee.value = "";
 }
 function storeInLocal(list) {
-  //done
   localStorage.setItem("taskList", JSON.stringify(list));
 }
 function getFromLocalStorage() {
-  //done
   let _list = JSON.parse(localStorage.getItem("taskList"));
   if (_list == null) {
     _list = [];
@@ -110,7 +93,6 @@ function getFromLocalStorage() {
   return _list;
 }
 function displayTask(list) {
-  //done
   let taskDisplay = document.getElementById("taskDisplay");
   taskDisplay.innerHTML = "";
   list.forEach((item) => {
@@ -151,9 +133,23 @@ function displayTask(list) {
     editIcon.classList.add("fa-pen-to-square");
     btnEdit.appendChild(editIcon);
 
+    const divOne = document.createElement("div");
+    const divTwo = document.createElement("div");
+    const divThree = document.createElement("div");
+    divOne.appendChild(btnDoneState);
+    divTwo.appendChild(taskParag);
+    divTwo.appendChild(assigneeSpan);
+    divThree.appendChild(btnEdit);
+    divThree.appendChild(deleteBtn);
+    divThree.classList.add("del-edit-btn");
+
+
+
     btnEdit.addEventListener("click", () => {
       let editTaskInput = document.createElement("input");
-      taskParag.replaceChild(editTaskInput, textP1);
+      editTaskInput.classList.add("editInpt")
+      divTwo.replaceChild(editTaskInput, taskParag);
+
       editTaskInput.value = item.taskInput;
       editTaskInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
@@ -171,8 +167,10 @@ function displayTask(list) {
               return ele;
             }
           });
-          textP1 = document.createTextNode(editTaskInput.value);
-          taskParag.replaceChild(textP1, editTaskInput);
+          let newTextP1 = document.createTextNode(editTaskInput.value);
+          taskParag.replaceChild(newTextP1, textP1);
+          divTwo.replaceChild(taskParag, editTaskInput);
+          textP1= newTextP1;
           taskList = _taskList;
           storeInLocal(taskList);
         }
@@ -180,15 +178,7 @@ function displayTask(list) {
     });
 
     btnEdit.disabled = item.doneState;
-    const divOne = document.createElement("div");
-    const divTwo = document.createElement("div");
-    const divThree = document.createElement("div");
-    divOne.appendChild(btnDoneState);
-    divTwo.appendChild(taskParag);
-    divTwo.appendChild(assigneeSpan);
-    divThree.appendChild(btnEdit);
-    divThree.appendChild(deleteBtn);
-    divThree.classList.add("del-edit-btn");
+    
     const newList = document.createElement("li");
     newList.classList.add(item.doneState ? "done-task" : "undone-task");
     newList.appendChild(divOne);
@@ -200,10 +190,9 @@ function displayTask(list) {
   getNumTasks(list);
 }
 function displayAlert(list, id) {
-  //done
   let delBtn = document.getElementById("delBtn");
   let closeBtn = document.getElementById("closeBtn");
-  let shadowModal = document.getElementById("shadowModal");
+  let shadowModal = document.getElementById("shadowModal-delete");
   shadowModal.hidden = false;
   function deleteItem() {
     deleteHandler(taskList, id);
@@ -224,7 +213,6 @@ function displayAlert(list, id) {
   });
 }
 function displayCounter(taskList) {
-  //done
   let counterDone = document.getElementById("counterDone");
   let counterUnDone = document.getElementById("counterUnDone");
   let _countUnDone = 0;
@@ -242,8 +230,45 @@ function displayCounter(taskList) {
   counterUnDone.appendChild(document.createTextNode(_countUnDone));
 }
 function* generateID() {
-  //done
   while (true) {
     yield Math.random().toString(36).slice(2);
   }
+}
+newTask.addEventListener("click", ()=>{
+  displayForm()
+})
+function displayForm() {
+  let shadowModal = document.getElementById("shadowModal-form");
+  shadowModal.hidden = false;
+
+  let submitTask = document.getElementById("submitTask");
+  submitTask.addEventListener("click",(event)=>{
+    addTaskHandler(event)
+    shadowModal.hidden = true;
+  });
+
+
+  let closeAdd = document.getElementById("closeAdd");
+  closeAdd.addEventListener("click", (event) => {
+    submitTask.removeEventListener("click", addTaskHandler);
+    shadowModal.hidden = true;
+  });
+  
+  shadowModal.addEventListener("click", (event) => {
+    submitTask.removeEventListener("click", addTaskHandler); 
+    let modal = event.target.closest("#formModal");
+    if (modal) {
+      return;
+    }
+    shadowModal.hidden = true;
+  });
+}
+function addTaskHandler(event) {
+  event.preventDefault();
+  let taskInput = task.value;
+  let asigneeInput = asignee.value;
+  addTask(taskInput, asigneeInput);
+  clearInput();
+  displayTask(taskList);
+  displayCounter(taskList);
 }
