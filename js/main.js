@@ -36,27 +36,43 @@ search.addEventListener("keyup", (event) => {
   let value = event.target.value;
   searchHandler(value, taskList);
 });
+let flagDone=false, flagPending=false;
 function handleFiltering(event){
-  let done = document.getElementById('done')
-  let pending = document.getElementById('pending')
+  let done = document.getElementById('done');
+  let pending = document.getElementById('pending');
   let filter = event.target.id;
-  if(filter === 'done' || filter === 'pending'){
-    if(filter === 'done') {
+  if(filter === "done"){
+    flagDone = !flagDone;
+    if(flagDone){
       let doneTasks= taskList.filter((item)=>{
         return item.doneState;
       })
       pending.classList.remove("active")
+      flagPending=false;
       done.classList.add("active")
       return displayTask(doneTasks);
-    };
-    if(filter === 'pending'){
+    } 
+    else {
+      done.classList.remove("active");
+      flagPending=false;
+      return displayTask(taskList);
+    }
+  }
+  if(filter === "pending"){
+    flagPending= !flagPending;
+    if(flagPending){
       let pendingTasks= taskList.filter((item)=>{
         return !item.doneState;
       })
       done.classList.remove("active")
+      flagDone=false;
       pending.classList.add("active")
       return displayTask(pendingTasks)
-    };
+    } else {
+      pending.classList.remove("active")
+      flagDone=false;
+      return displayTask(taskList)
+    }
   }
 }
 function searchHandler(value, taskList) {
