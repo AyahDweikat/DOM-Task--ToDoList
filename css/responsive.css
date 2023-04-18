@@ -1,17 +1,431 @@
 @media screen and (max-width: 380px) {
-
+    .logo {
+        height: 40px;
+        width: 100px;
+        margin-block: 15px;
+        padding-left: 10px;
+    }
+    .searchHandle {
+        margin-left: 15px;
+    }
+    .search {
+        padding-inline: 35px;
+        height: 40px;
+        width: 180px;
+        margin-block: 15px;
+        outline: none;
+        border: 0px;
+    }
+    .toggle-theme {
+        padding: 8px;
+        height: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
+    .hero-section {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        position: relative;
+    }
+    .heading{
+        padding-top: 17px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+    }
+    .heading h2 {
+        font-size: 14px;
+        margin-top: 10px;
+        margin-left: 45px;
+        margin-right: 12px;
+    }
+    .heading h2::before {
+        width: 7%;
+        top: 36px;
+        left: 10px;
+    }
+    .filters {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        padding-block: 24px 42px;
+    }
+    .filters > span{
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 17.36px;
+        padding: 6px 7px 6px 7px;
+    }
+    span.dash-span {
+        border: none;
+        padding: 7px 0px 6px;
+    }
+    .heading button {
+        outline: none;
+        border: none;
+        padding: 10px 10px 9.6px;
+        font-size: 13px;
+        line-height: 15px;
+        font-weight: 600;
+        margin-left: auto;
+    }
+    .tasks {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        width: 90%;
+        margin-inline: auto;
+        height: inherit;
+    }
+    .task-list p {
+        font-size: 12px;
+        line-height: 21.78px;
+        color: var(--main-color);
+        padding-top: 11px;
+    }
+    .task-list span {
+        padding-bottom: 14px;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 16.94px;
+        color: var(--secondary-undone-color);
+    }
+    .btnDoneState{
+        margin: 22px 10px 10px 10px;
+        background-color: transparent;
+        font-size: 10px;
+        font-weight: 100;
+    }
+    .modal {
+        padding-left: 26px;
+        padding-right: 36px;
+        width:90%;
+        top: 18%;
+        left: 5%;
+    }
+    .modal h3 {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 26.63px;
+        padding-block:28px 14px;
+    }
+    .modal p {
+        color: var(--theme-color);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21.78px;
+        padding-block-end: 6px;
+    }
+    .modal span {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 14px;
+    }
+    .modal-btns {
+        margin-top: 31px;
+        padding-bottom: 35px;
+        display: flex;
+        gap: 9px;
+        justify-content: flex-end;
+    }
+    .modal-btns button {
+        outline: none;
+        border:none;
+        padding: 8px 18px;
+        border: 1px solid var(--main-color);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21.78px;
+    }
 }
 @media screen and (min-width: 380px) and (max-width: 577px) {
-
+    .logo {
+        height: 40px;
+        width: 100px;
+        margin-block: 15px;
+        padding-left: 10px;
+    }
+    .searchHandle {
+        margin-left: 15px;
+    }
+    .search {
+        padding-inline: 35px;
+        height: 40px;
+        width: 180px;
+        margin-block: 15px;
+        outline: none;
+        border: 0px;
+    }
+    .toggle-theme {
+        padding: 8px;
+        height: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
+    .hero-section {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        position: relative;
+    }
+    .heading{
+        padding-top: 17px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+    }
+    .heading h2 {
+        font-size: 14px;
+        margin-top: 10px;
+        margin-left: 45px;
+        margin-right: 12px;
+    }
+    .heading h2::before {
+        width: 7%;
+        top: 36px;
+        left: 10px;
+    }
+    .filters {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        padding-block: 24px 42px;
+    }
+    .filters > span{
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 17.36px;
+        padding: 6px 7px 6px 7px;
+    }
+    span.dash-span {
+        border: none;
+        padding: 7px 0px 6px;
+    }
+    .heading button {
+        outline: none;
+        border: none;
+        padding: 10px 10px 9.6px;
+        font-size: 13px;
+        line-height: 15px;
+        font-weight: 600;
+        margin-left: auto;
+    }
+    .tasks {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        width: 90%;
+        margin-inline: auto;
+        height: inherit;
+    }
+    .task-list p {
+        font-size: 14px;
+        line-height: 21.78px;
+        color: var(--main-color);
+        padding-top: 11px;
+    }
+    .task-list span {
+        padding-bottom: 14px;
+        display: inline-block;
+        font-size: 11px;
+        line-height: 16.94px;
+        color: var(--secondary-undone-color);
+    }
+    .btnDoneState{
+        margin: 22px 10px 10px 10px;
+        background-color: transparent;
+        font-size: 14px;
+        font-weight: 100;
+    }
+    .modal {
+        padding-left: 26px;
+        padding-right: 36px;
+        width:90%;
+        top: 18%;
+        left: 5%;
+    }
+    .modal h3 {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 26.63px;
+        padding-block:28px 14px;
+    }
+    .modal p {
+        color: var(--theme-color);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21.78px;
+        padding-block-end: 6px;
+    }
+    .modal span {
+        display: inline-block;
+        color: var(--secondary-done-color);
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 14px;
+    }
+    .modal-btns {
+        margin-top: 31px;
+        padding-bottom: 35px;
+        display: flex;
+        gap: 9px;
+        justify-content: flex-end;
+    }
+    .modal-btns button {
+        outline: none;
+        border:none;
+        padding: 8px 18px;
+        border: 1px solid var(--main-color);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21.78px;
+    }
 }
 @media screen and (min-width: 577px) and (max-width: 770px) {
-
+    .logo {
+        height: 40px;
+        margin-block: 15px;
+        padding-left: 10px;
+    }
+    .searchHandle {
+        margin-left: 15px;
+    }
+    .search {
+        padding-inline: 35px;
+        height: 40px;
+        width: 300px;
+        margin-block: 15px;
+        outline: none;
+        border: 0px;
+    }
+    .toggle-theme {
+        padding: 10px;
+        height: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
+    .hero-section {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        position: relative;
+    }
+    .heading{
+        padding-top: 17px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+    }
+    .heading h2 {
+        font-size: 15px;
+        margin-top: 10px;
+        margin-left: 45px;
+        margin-right: 12px;
+    }
+    .heading h2::before {
+        width: 5%;
+        top: 36px;
+        left: 10px;
+    }
+    .filters {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding-block: 24px 42px;
+    }
+    .filters > span{
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 17.36px;
+        padding: 7px 12.32px 6px 12px;
+    }
+    span.dash-span {
+        border: none;
+        padding: 7px 0px 6px;
+    }
+    .heading button {
+        outline: none;
+        border: none;
+        padding: 10px 17px 9.6px;
+        font-size: 13px;
+        line-height: 15px;
+        font-weight: 600;
+        margin-left: auto;
+    }
+    .tasks {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        width: 80%;
+        margin-inline: auto;
+        height: inherit;
+    }
+    .modal {
+        padding-left: 26px;
+        padding-right: 36px;
+        background-color: var(--bg-undone-color);
+        text-align: left;
+        width: 513px;
+        margin-inline: auto;
+        top: 25%;
+        left: 8%;
+    }
 }
-@media screen and (min-width: 770px) and (max-width: 1100px) {
-
+@media screen and (min-width: 770px) and (max-width: 1000px) {
+    .logo {
+        height: 40px;
+        margin-block: 15px;
+        padding-left: 10px;
+    }
+    .searchHandle {
+        margin-left: 15px;
+    }
+    .search {
+        padding-inline: 35px;
+        height: 40px;
+        width: 450px;
+        margin-block: 15px;
+        outline: none;
+        border: 0px;
+    }
+    .toggle-theme {
+        padding: 10px;
+        height: fit-content;
+        margin: 0;
+        margin-left: auto;
+    }
+    .filters > span{
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 17.36px;
+        padding: 7px 12.32px 6px 12px;
+    }
+    span.dash-span {
+        border: none;
+        padding: 7px 0px 6px;
+    }
+    .heading h2::before {
+        width: 5%;
+        left: 20px;
+    }
+    .tasks {
+        padding-inline-start: 0%;
+        padding-inline-end: 0%;
+        width: 65%;
+        margin-inline: auto;
+        height: inherit;
+    }
+    .modal {
+        padding-left: 26px;
+        padding-right: 36px;
+        background-color: var(--bg-undone-color);
+        text-align: left;
+        width: 513px;
+        margin-inline: auto;
+        top: 25%;
+        left: 20%;
+    }
 }
-@media screen and (min-width: 1100px) and (max-width: 1220px) {
-
+@media screen and (min-width: 1000px) and (max-width: 1220px) {
+    .heading h2::before {
+        width: 5.5%;
+        left: 20px;
+    }
 }
 
 
