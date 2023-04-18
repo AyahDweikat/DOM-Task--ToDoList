@@ -335,3 +335,4 @@ function addTaskHandler(event) {
   displayCounter(taskList);
 }
 
+
