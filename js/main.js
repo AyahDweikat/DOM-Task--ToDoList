@@ -129,15 +129,19 @@ function deleteHandler(list, id) {
   searchHandler(search.value, taskList);
 }
 function addTask(taskInput, asigneeInput) {
-  let genID = generateID();
-  let objTask = {
-    id: genID.next().value,
-    taskInput,
-    asigneeInput,
-    doneState: false,
-  };
-  taskList.push(objTask);
-  storeInLocal(taskList);
+  if(taskInput && asigneeInput){
+    let genID = generateID();
+    let objTask = {
+      id: genID.next().value,
+      taskInput,
+      asigneeInput,
+      doneState: false,
+    };
+    taskList.push(objTask);
+    storeInLocal(taskList);
+  } else {
+    return;
+  }
 }
 function clearInput() {
   task.value = "";
@@ -308,8 +312,6 @@ function displayForm() {
     addTaskHandler(event)
     shadowModal.hidden = true;
   });
-
-
   let closeAdd = document.getElementById("closeAdd");
   closeAdd.addEventListener("click", (event) => {
     submitTask.removeEventListener("click", addTaskHandler);

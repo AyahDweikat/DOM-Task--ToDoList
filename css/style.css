@@ -184,7 +184,7 @@ section {
     -ms-border-radius: 24px;
     -o-border-radius: 24px;
 }
-.filters > span:hover, .filters > span.active {
+.filters > span.active {
     background-color: var(--main-color);
     color: var(--white-color);
 }
