@@ -7,29 +7,30 @@
 
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
-
 let newTask =document.getElementById("newTask");
 let filters = document.getElementById("filters");
 let handleIconToggle = document.getElementById("handleIconToggle")
 let search = document.getElementById("search");
-
-
 let taskList = [];
 taskList = getFromLocalStorage();
 storeInLocal(taskList);
 getNumTasks(taskList);
+
 filters.addEventListener("click", (event)=>{
   handleFiltering(event)
   
 })
 let count =true;
 handleIconToggle.addEventListener("click", ()=>{
+  let logoHandle = document.getElementById("logoHandle");
   let body = document.body;
   count = !count;
   if(!count){
     body.classList.add("dark-theme");
+    logoHandle.src="../assets/images/logo-dark-theme-removebg-preview-_1_.webp"
   } else {
     body.classList.remove("dark-theme");
+    logoHandle.src= "../assets/images/logo-light-theme.webp"
   }
 })
 search.addEventListener("keyup", (event) => {
