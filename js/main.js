@@ -5,46 +5,47 @@
 <path d="M1.99082e-08 10.5C-0.000102788 12.1486 0.397977 13.774 1.16201 15.2447C1.92604 16.7154 3.03456 17.99 4.3978 18.9653C5.76105 19.9406 7.34072 20.5893 9.00891 20.8588C10.6771 21.1283 12.3869 21.011 14 20.5164C11.8134 19.8464 9.90307 18.5138 8.5469 16.7124C7.19073 14.9109 6.45946 12.7346 6.45946 10.5C6.45946 8.26541 7.19073 6.08909 8.5469 4.28764C9.90307 2.48618 11.8134 1.15356 14 0.48361C12.3869 -0.0109591 10.6771 -0.128257 9.00891 0.141214C7.34072 0.410685 5.76105 1.05935 4.3978 2.0347C3.03456 3.01004 1.92604 4.28465 1.16201 5.75533C0.397977 7.22601 -0.000102788 8.85144 1.99082e-08 10.5Z" fill="black"/>
 </svg> */}
 
-
-let count =0;
-let search = document.getElementById("search");
 let task = document.getElementById("task");
 let asignee = document.getElementById("assignee");
-let newTask =document.getElementById("newTask");
-// let toggleTheme = document.getElementById("toggle-theme")
-let handleIconToggle = document.getElementById("handleIconToggle")
 
-let body = document.body
+let newTask =document.getElementById("newTask");
+let filters = document.getElementById("filters");
+let handleIconToggle = document.getElementById("handleIconToggle")
+let search = document.getElementById("search");
+
+
 let taskList = [];
 taskList = getFromLocalStorage();
 storeInLocal(taskList);
 getNumTasks(taskList);
-let filters = document.getElementById("filters");
 filters.addEventListener("click", (event)=>{
   handleFiltering(event)
+  
 })
+let count =true;
 handleIconToggle.addEventListener("click", ()=>{
-  // console.log("toggle")
-  count++;
-  if(count%2 ==1){
+  let body = document.body;
+  count = !count;
+  if(!count){
     body.classList.add("dark-theme");
   } else {
     body.classList.remove("dark-theme");
-    toggleTheme.innerHTML="dark";
   }
 })
+search.addEventListener("keyup", (event) => {
+  let value = event.target.value;
+  searchHandler(value, taskList);
+});
 function handleFiltering(event){
   let done = document.getElementById('done')
   let pending = document.getElementById('pending')
-  let all = document.getElementById('all')
   let filter = event.target.id;
-  if(filter === 'done' || filter === 'pending' || filter ==="all"){
+  if(filter === 'done' || filter === 'pending'){
     if(filter === 'done') {
       let doneTasks= taskList.filter((item)=>{
         return item.doneState;
       })
       pending.classList.remove("active")
-      all.classList.remove("active")
       done.classList.add("active")
       return displayTask(doneTasks);
     };
@@ -53,22 +54,11 @@ function handleFiltering(event){
         return !item.doneState;
       })
       done.classList.remove("active")
-      all.classList.remove("active")
       pending.classList.add("active")
       return displayTask(pendingTasks)
     };
-    if(filter === 'all'){
-      pending.classList.remove("active")
-      done.classList.remove("active")
-      all.classList.add("active")
-      return displayTask(taskList)
-    }
   }
 }
-search.addEventListener("keyup", (event) => {
-  let value = event.target.value;
-  searchHandler(value, taskList);
-});
 function searchHandler(value, taskList) {
   let searchedResult = [];
   if (value == "") {
