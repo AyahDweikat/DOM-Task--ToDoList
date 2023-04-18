@@ -1,39 +1,46 @@
 
-:root{
+body{
     --main-font-family:Inter;
-    --main-color: #14B8A6;
+    --bg-nav-color:#FFFFFF;
+    --bg-search-color:#E3E3E3;
     --theme-color:#000000;
-    --icon-undone-color:#EEEEEE;
-    --icon-border-color:#A4A4A4;
+    --black-color:#000000;
+    --white-color:#FFFFFF;
+    --search-color:#666666;
+    --main-bg-color:#F5F5F5;
+    --main-color: #14B8A6;
+    --secondary-undone-color:#A4A4A4;
+    --secondary-done-color:#9A9A9A;
+    --shadow-bg-color:#4d4d4d4d;
+    --bg-input-color:#E6E6E6;
     --bg-undone-color:#FFFFFF;
     --bg-done-color:#E4E4E4;
-    --bg-nav-color:#FFFFFF;
-    /* --main-bg-color:#EEEEEE; */
-    --bg-search-color:#E3E3E3;
-    --main-bg-color:#F5F5F5;
-    --search-color:#666666;
-    --secondary-color:#A4A4A4;
-    --icon-edit-color:#9A9A9A;
-    --bg-input-color:#E6E6E6;
-    --shadow-bg-color:#4D4D4D4D;
+    --icon-disabled-color:#9A9A9A;
+    --icon-undone-color:#A4A4A4;
+    --icon-undone-bg-color:#EEEEEE;
+    --icon-done-color:#FFFFFF;
 }
-/* :root{
+.dark-theme{
     --main-font-family:Inter;
-    --main-color: #14B8A6;
+    --bg-nav-color:#4D4D4D;
+    --bg-search-color:#E3E3E3;
     --theme-color:#FFFFFF;
-    --icon-undone-color:#9A9A9A;
-    --icon-border-color:#14B8A6;
+    --black-color:#000000;
+    --white-color:#FFFFFF;
+    --search-color:#666666;
+    --main-bg-color:#333333;
+    --main-color: #14B8A6;
+    --secondary-undone-color:#A4A4A4;
+    --secondary-done-color:#9A9A9A;
+    --shadow-bg-color:#4d4d4d4d;
+    --bg-input-color:#E6E6E6;
     --bg-undone-color:#1A1A1A;
     --bg-done-color:#4D4D4D;
-    --bg-nav-color:#4D4D4D;
-    --main-bg-color:#333333;
-    --bg-search-color:#E3E3E3;
-    --search-color:#666666;
-    --secondary-color:#A4A4A4;
-    --icon-edit-color:#9A9A9A;
-    --bg-input-color:#E6E6E6;
-    --shadow-bg-color:#4D4D4D4D;
-} */
+    --icon-disabled-color:#9A9A9A;
+    --icon-undone-color:#14B8A6;
+    --icon-undone-bg-color:#9A9A9A;
+    --icon-done-color:#FFFFFF;
+}
 
 *{
     padding: 0px;
@@ -43,6 +50,7 @@
 }
 body {
     position: relative;
+    background-color: var(--main-bg-color);
 }
 header {
     display: flex;
@@ -94,12 +102,17 @@ header {
 .search:placeholder-shown {
     color: var(--search-color);
 }
-
+.toggle-theme {
+    padding: 10px;
+    height: fit-content;
+    margin: 0;
+    margin-left: auto;
+}
 /* @todo later */
-
-.hero-section {
+section {
     background-color: var(--main-bg-color);
-    background-color: #F5F5F5;
+}
+.hero-section {
     padding-inline-start: 8%;
     padding-inline-end: 26%;
     position: relative;
@@ -112,6 +125,7 @@ header {
     text-transform: capitalize;
     font-size: 24px;
     margin-right: 12px;
+    color: var(--theme-color);
 }
 .heading h2::before {
     content: "";
@@ -133,7 +147,7 @@ header {
     font-size: 14px;
     line-height: 17px;
     font-weight: 700;
-    color: var(--bg-nav-color);
+    color: var(--white-color);
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
@@ -144,8 +158,8 @@ header {
     margin-inline-end: 7px;
     padding:2px 3px 2px 4px;
     background-color: var(--main-color);
-    border: 1px solid var(--bg-nav-color);
-    color: var(--bg-nav-color);
+    border: 1px solid var(--white-color);
+    color: var(--white-color);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -172,7 +186,7 @@ header {
 }
 .filters > span:hover, .filters > span.active {
     background-color: var(--main-color);
-    color: var(--bg-undone-color);
+    color: var(--white-color);
 }
 span.dash-span {
     border: none;
@@ -205,7 +219,7 @@ span.dash-span {
     display: inline-block;
     font-size: 14px;
     line-height: 16.94px;
-    color: var(--secondary-color);
+    color: var(--secondary-undone-color);
 }
 .task-list button {
     outline: none;
@@ -217,11 +231,18 @@ span.dash-span {
     font-size: 20px;
     font-weight: 100;
 }
-.undoneBtn {
-    color: var(--icon-border-color);
+.undoneBtn i {
+    color: var(--icon-undone-color) !important;
 }
 .doneBtn {
+    background-color: transparent;
     color: var(--bg-done-color);
+    padding: 0;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 .undone-task {
     /* order: 1; */
@@ -271,7 +292,7 @@ span.dash-span {
     height: 18px;
     width: 14px;
     font-size: 17px;
-    color:var(--icon-edit-color);
+    color:var(--icon-disabled-color);
 }
 .btnEdit:not(:disabled) {
     color: var(--main-color);
@@ -293,7 +314,7 @@ span.dash-span {
     top: -70px;
     bottom: 0;
     left: 0;
-    background-color: #4D4D4D4D;
+    background-color: var(--shadow-bg-color);
 }
 .modal {
     padding-left: 26px;
@@ -328,12 +349,10 @@ span.dash-span {
 }
 .modal span {
     display: inline-block;
-    color: var(--theme-color);
-    color: #9A9A9A;
+    color: var(--secondary-done-color);
     font-size: 14px;
     font-weight: 400;
     line-height: 16.94px;
-    /* padding-block-end: 31px; */
 }
 .modal-btns {
     margin-top: 31px;
@@ -373,9 +392,9 @@ span.dash-span {
 }
 .tasks {
     background-color: var(--main-bg-color);
-    background-color: #F5F5F5;
     padding-inline-start: 8%;
     padding-inline-end: 26%;
+    height: inherit;
 }
 .form-control {
     display: flex;
