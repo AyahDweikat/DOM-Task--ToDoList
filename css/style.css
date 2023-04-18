@@ -88,7 +88,6 @@ header {
     outline: none;
     border: 0px;
 }
-
 .search::placeholder{
     color: var(--search-color);
 }
@@ -170,6 +169,10 @@ header {
     -moz-border-radius: 24px;
     -ms-border-radius: 24px;
     -o-border-radius: 24px;
+}
+.filters > span:hover, .filters > span.active {
+    background-color: var(--main-color);
+    color: var(--bg-undone-color);
 }
 span.dash-span {
     border: none;
@@ -298,10 +301,9 @@ span.dash-span {
     background-color: var(--bg-undone-color);
     text-align: left;
     width: 513px;
-    height: 236px;
     margin-inline: auto;
     position: fixed;
-    top: 186px;
+    top: 25%;
     left: 30%;
     z-index: 4;
     -webkit-border-radius: 12px;
@@ -327,12 +329,14 @@ span.dash-span {
 .modal span {
     display: inline-block;
     color: var(--theme-color);
+    color: #9A9A9A;
     font-size: 14px;
     font-weight: 400;
     line-height: 16.94px;
-    padding-block-end: 31px;
+    /* padding-block-end: 31px; */
 }
 .modal-btns {
+    margin-top: 31px;
     padding-bottom: 35px;
     display: flex;
     gap: 9px;
@@ -356,9 +360,16 @@ span.dash-span {
     background-color: var(--bg-undone-color);
     color: var(--main-color);
 }
+.modal-btns button:first-child:hover {
+    background-color: var(--bg-input-color);
+}
 .modal-btns button:last-child {
     background-color: var(--main-color);
     color: var(--bg-undone-color);
+}
+.modal-btns button:last-child:hover {
+    background-color: var(--main-color);
+    background-color: hsl(173, 80%, 45%);
 }
 .tasks {
     background-color: var(--main-bg-color);
@@ -388,4 +399,7 @@ span.dash-span {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
     border-radius: 8px;
+}
+input:hover, input:focus{
+    background-color: hsl(0, 0%, 85%);
 }

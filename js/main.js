@@ -7,8 +7,43 @@ let newTask =document.getElementById("newTask");
 let taskList = [];
 taskList = getFromLocalStorage();
 storeInLocal(taskList);
-
-
+getNumTasks(taskList);
+let filters = document.getElementById("filters");
+filters.addEventListener("click", (event)=>{
+  handleFiltering(event)
+})
+function handleFiltering(event){
+  let done = document.getElementById('done')
+  let pending = document.getElementById('pending')
+  let all = document.getElementById('all')
+  let filter = event.target.id;
+  if(filter === 'done' || filter === 'pending' || filter ==="all"){
+    if(filter === 'done') {
+      let doneTasks= taskList.filter((item)=>{
+        return item.doneState;
+      })
+      pending.classList.remove("active")
+      all.classList.remove("active")
+      done.classList.add("active")
+      return displayTask(doneTasks);
+    };
+    if(filter === 'pending'){
+      let pendingTasks= taskList.filter((item)=>{
+        return !item.doneState;
+      })
+      done.classList.remove("active")
+      all.classList.remove("active")
+      pending.classList.add("active")
+      return displayTask(pendingTasks)
+    };
+    if(filter === 'all'){
+      pending.classList.remove("active")
+      done.classList.remove("active")
+      all.classList.add("active")
+      return displayTask(taskList)
+    }
+  }
+}
 search.addEventListener("keyup", (event) => {
   let value = event.target.value;
   searchHandler(value, taskList);
@@ -185,9 +220,8 @@ function displayTask(list) {
     newList.appendChild(divTwo);
     newList.appendChild(divThree);
     taskDisplay.appendChild(newList);
-    getNumTasks(list);
   });
-  getNumTasks(list);
+  getNumTasks(taskList);
 }
 function displayAlert(list, id) {
   let delBtn = document.getElementById("delBtn");
