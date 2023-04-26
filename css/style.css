@@ -160,11 +160,11 @@ section {
     background-color: var(--main-color);
     border: 1px solid var(--white-color);
     color: var(--white-color);
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
 }
 .filters {
     display: flex;
@@ -188,10 +188,7 @@ section {
     background-color: var(--main-color);
     color: var(--white-color);
 }
-span.dash-span {
-    border: none;
-    padding: 7px 0px 6px;
-}
+
 .task-list {
     display: flex;
     flex-direction: column;
@@ -245,7 +242,6 @@ span.dash-span {
     -o-border-radius: 50%;
 }
 .undone-task {
-    /* order: 1; */
     margin-block: 0px;
     background-color: var(--bg-undone-color);
     -webkit-border-radius: 12px;
@@ -255,7 +251,6 @@ span.dash-span {
     border-radius: 12px;
 }
 .done-task {
-    /* order: 2; */
     margin-block: 0px;
     background-color: var(--bg-done-color);
     -webkit-border-radius: 12px;
